@@ -26,6 +26,12 @@ class Role(PkModel):
         return f"<Role({self.name})>"
 
 
+class Note(PkModel):
+    __tablename__ = "notes"
+
+    content = Column(db.String(200), nullable=False)
+    user_id = Column(db.Integer, db.ForeignKey("users.id"))
+
 class User(UserMixin, PkModel):
     """A user of the app."""
 
@@ -40,7 +46,8 @@ class User(UserMixin, PkModel):
     last_name = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
-
+    notes = relationship("Note", backref="user")
+    
     @hybrid_property
     def password(self):
         """Hashed password."""

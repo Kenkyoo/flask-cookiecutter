@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<form method="POST">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <input name="content" placeholder="Nueva nota">
+  <button>Guardar</button>
+</form>
+
+<ul>
+  {% for note in notes %}
+    <li>{{ note.content }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
