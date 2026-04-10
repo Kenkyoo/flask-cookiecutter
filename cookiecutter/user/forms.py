@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """User forms."""
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField
+from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from .models import User
@@ -43,3 +43,10 @@ class RegisterForm(FlaskForm):
             self.email.errors.append("Email already registered")
             return False
         return True
+
+class NoteForm(FlaskForm):
+    content = StringField("Contenido de la nota", validators=[
+        DataRequired(), 
+        Length(min=1, max=200)
+    ])
+    submit = SubmitField("Guardar nota")

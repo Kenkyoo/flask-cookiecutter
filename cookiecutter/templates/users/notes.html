@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<<<<<<< HEAD
 
 
 <form method="POST">
@@ -15,4 +16,63 @@
   {% endfor %}
 </ul>
 
+=======
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 mb-5">
+            <div class="card border-0 shadow-sm p-4">
+                <h4 class="fw-bold mb-3"><i class="fa-solid fa-pen-nib text-primary me-2"></i>Nueva Nota</h4>
+                <form method="POST">
+                    {{ form.csrf_token }}
+                    <div class="input-group">
+                        {{ form.content(class_="form-control form-control-lg border-0 bg-light", placeholder="¿En qué estás pensando?") }}
+                        <button class="btn btn-primary px-4" type="submit">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    {% for error in form.content.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <h5 class="text-muted mb-4">Tus Notas Recientes</h5>
+            <div class="row g-3">
+                {% for note in notes | reverse %}
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm note-card">
+                        <div class="card-body">
+                            <p class="card-text">{{ note.content }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 text-end">
+                            <small class="text-muted" style="font-size: 0.75rem;">
+                                <i class="fa-regular fa-clock me-1"></i> Justo ahora
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-12 text-center py-5">
+                    <i class="fa-solid fa-note-sticky fa-3x text-light mb-3"></i>
+                    <p class="text-muted">Aún no tienes notas. ¡Escribe la primera arriba!</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .note-card {
+        background-color: #fff9c4; /* Un toque amarillo tipo post-it muy sutil */
+        border-left: 4px solid #ffeb3b !important;
+        transition: transform 0.2s;
+    }
+    .note-card:hover {
+        transform: scale(1.02);
+    }
+</style>
+>>>>>>> 637be82 (add models notes)
 {% endblock %}

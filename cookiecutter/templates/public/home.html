@@ -1,35 +1,82 @@
-
 {% extends "layout.html" %}
+
 {% block content %}
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <div class="container">
-    
-      <h1 class="display-3">Welcome to app-flask-cookiecutter</h1>
-    
-      <p>This is a starter Flask template. It includes Bootstrap 5, jQuery 3, Flask-SQLAlchemy, WTForms, and various testing utilities out of the box.</p>
-      <p><a href="https://github.com/cookiecutter-flask/cookiecutter-flask" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+<div class="py-5 mb-4 bg-white rounded-4 shadow-sm border">
+    <div class="container-fluid py-5 text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold text-dark mb-3">Welcome to <span class="text-primary">app-flask-cookiecutter</span></h1>
+                <p class="lead text-muted mb-4">
+                    Este es un template profesional de Flask que incluye Bootstrap 5, Flask-SQLAlchemy, y utilidades de testing listas para producción. 
+                    Ideal para construir aplicaciones robustas y escalables.
+                </p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="https://github.com/cookiecutter-flask/cookiecutter-flask" class="btn btn-primary btn-lg px-4 gap-3 rounded-pill">
+                        <i class="fa-brands fa-github me-2"></i>Ver en GitHub
+                    </a>
+                    <a href="{{ url_for('public.about') }}" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">
+                        Saber más
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-</div><!-- /.jumbotron -->
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4">
-      <h2><i class="fa-solid fa-code"></i> Bootstrap 5</h2>
-      <p>Sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development.</p>
-      <p><a class="btn btn-outline-secondary" href="http://getbootstrap.com/">Official website &raquo;</a></p>
-    </div>
-    <div class="col-lg-4">
-      <h2><i class="fa-solid fa-flask"></i> SQLAlchemy</h2>
-      <p>SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.</p>
-      <p><a href="http://www.sqlalchemy.org/" class="btn btn-outline-secondary">Official website &raquo;</a></p>
-   </div>
-    <div class="col-lg-4">
-      <h2><i class="fa-solid fa-pen-to-square"></i> WTForms</h2>
-      <p>WTForms is a flexible forms validation and rendering library for python web development.</p>
-      <p><a href="http://wtforms.simplecodes.com/" class="btn btn-outline-secondary">Official website &raquo;</a></p>
-    </div>
-  </div><!-- /.row -->
 </div>
-{% endblock %}
 
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card h-100 p-4 border-0 shadow-sm transition-hover">
+                <div class="text-primary mb-3">
+                    <i class="fa-solid fa-code fa-2x"></i>
+                </div>
+                <h3 class="fw-bold">Bootstrap 5</h3>
+                <p class="text-muted">Un framework front-end potente y moderno para desarrollar sitios móviles primero con facilidad y rapidez.</p>
+                <div class="mt-auto pt-3">
+                    <a class="btn btn-link text-decoration-none p-0 fw-bold" href="http://getbootstrap.com/">
+                        Sitio oficial <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card h-100 p-4 border-0 shadow-sm transition-hover">
+                <div class="text-success mb-3">
+                    <i class="fa-solid fa-database fa-2x"></i>
+                </div>
+                <h3 class="fw-bold">SQLAlchemy</h3>
+                <p class="text-muted">El toolkit de SQL para Python que ofrece toda la potencia y flexibilidad de SQL con la elegancia de un ORM.</p>
+                <div class="mt-auto pt-3">
+                    <a href="http://www.sqlalchemy.org/" class="btn btn-link text-decoration-none p-0 fw-bold text-success">
+                        Sitio oficial <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card h-100 p-4 border-0 shadow-sm transition-hover">
+                <div class="text-warning mb-3">
+                    <i class="fa-solid fa-pen-to-square fa-2x"></i>
+                </div>
+                <h3 class="fw-bold">WTForms</h3>
+                <p class="text-muted">Una librería flexible para la validación y renderizado de formularios en tus aplicaciones de Python.</p>
+                <div class="mt-auto pt-3">
+                    <a href="http://wtforms.simplecodes.com/" class="btn btn-link text-decoration-none p-0 fw-bold text-warning">
+                        Sitio oficial <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .transition-hover:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+</style>
+{% endblock %}

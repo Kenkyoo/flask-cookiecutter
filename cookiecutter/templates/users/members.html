@@ -1,9 +1,100 @@
-
 {% extends "layout.html" %}
+
 {% block content %}
-    <div class="container">
-        <h1>Welcome {{ current_user.username }}</h1>
-        <h3>This is the members-only page.</h3>
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">Panel de Usuario</h2>
+            <p class="text-muted">Bienvenido de nuevo, {{ current_user.username }}.</p>
+        </div>
     </div>
+
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm text-center p-4">
+                <div class="mb-3">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem;">
+                        {{ current_user.username[0] | upper }}
+                    </div>
+                </div>
+                <h4 class="fw-bold mb-1">{{ current_user.username }}</h4>
+                <p class="text-muted small mb-3">{{ current_user.email }}</p>
+                <div class="badge bg-light text-primary border border-primary-subtle rounded-pill px-3 py-2 mb-3">
+                    Miembro desde: {{ current_user.created_at.strftime('%d %b, %Y') if current_user.created_at else 'Recientemente' }}
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-primary btn-sm rounded-pill">Editar Perfil</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm p-3 h-100">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-shape bg-soft-success text-success p-3 rounded-3 me-3">
+                                <i class="fa-solid fa-circle-check fa-lg"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1 small uppercase">Estado de Cuenta</h6>
+                                <span class="fw-bold">Activa</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm p-3 h-100">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-shape bg-soft-info text-info p-3 rounded-3 me-3">
+                                <i class="fa-solid fa-shield-halved fa-lg"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1 small uppercase">Seguridad</h6>
+                                <span class="fw-bold">Verificada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-3 border-bottom">
+                    <h5 class="mb-0 fw-bold">Información de la cuenta</h5>
+                </div>
+                <div class="card-body">
+                    <p>Este es el panel exclusivo para miembros. Aquí podrías listar:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <span>Historial de actividad</span>
+                            <span class="badge bg-secondary rounded-pill">Próximamente</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <span>Proyectos creados</span>
+                            <span class="badge bg-secondary rounded-pill">0</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <span>Configuración de notificaciones</span>
+                            <i class="fa-solid fa-chevron-right text-muted"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Un pequeño toque extra para los iconos de las cards */
+    .bg-soft-success { background-color: #d1e7dd; }
+    .bg-soft-info { background-color: #cff4fc; }
+    .icon-shape {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+    }
+</style>
 {% endblock %}
 
