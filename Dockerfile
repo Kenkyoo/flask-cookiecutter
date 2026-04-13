@@ -43,6 +43,7 @@ RUN npm install
 COPY . .
 ENV FLASK_APP=autoapp.py
 ENV FLASK_ENV=production
+ENV DATABASE_URL=sqlite:////tmp/build.db
 RUN npm run build
 
 EXPOSE 5000
