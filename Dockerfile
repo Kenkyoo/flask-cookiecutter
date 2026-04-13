@@ -44,6 +44,7 @@ COPY . .
 ENV FLASK_APP=autoapp.py
 ENV FLASK_ENV=production
 ENV DATABASE_URL=sqlite:////tmp/build.db
+ENV SECRET_KEY=not-so-secret-during-build
 RUN npm run build
 
 EXPOSE 5000
