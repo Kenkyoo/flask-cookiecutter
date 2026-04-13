@@ -54,7 +54,7 @@ ENV SQLALCHEMY_TRACK_MODIFICATIONS=False
 RUN npm run build
 
 EXPOSE 5000
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--access-logfile", "-", "autoapp:app"]
+CMD gunicorn --bind 0.0.0.0:$PORT autoapp:app
 
 
 # ================================= DEVELOPMENT ================================
