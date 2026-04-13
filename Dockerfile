@@ -38,7 +38,7 @@ COPY requirements requirements
 RUN pip install --no-cache -r requirements/prod.txt
 
 # Instalamos las dependencias de Node y compilamos
-COPY package.json package-lock.json ./
+COPY package.json package.json ./
 RUN npm install
 COPY . .
 RUN npm run build  # <--- Esto generará la carpeta static/build
