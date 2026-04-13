@@ -54,7 +54,6 @@ ENV SQLALCHEMY_TRACK_MODIFICATIONS=False
 RUN npm run build
 
 EXPOSE 5000
-ENTRYPOINT ["/bin/bash", "shell_scripts/supervisord_entrypoint.sh"]
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--access-logfile", "-", "autoapp:app"]
 
 
@@ -63,4 +62,4 @@ FROM builder AS development
 RUN pip install --no-cache -r requirements/dev.txt
 EXPOSE 2992
 EXPOSE 5000
-CMD gunicorn --bind 0.0.0.0:$PORT --access-logfile - autoapp:app
+CMD gunicorn --bind 0.0.0.0:$PORT autoapp:app
