@@ -41,9 +41,9 @@ RUN pip install --no-cache -r requirements/prod.txt
 COPY package.json package.json ./
 RUN npm install
 COPY . .
-RUN npm run build  # <--- Esto generará la carpeta static/build
-
-COPY . .
+ENV FLASK_APP=autoapp.py
+ENV FLASK_ENV=production
+RUN npm run build
 
 EXPOSE 5000
 ENTRYPOINT ["/bin/bash", "shell_scripts/supervisord_entrypoint.sh"]
