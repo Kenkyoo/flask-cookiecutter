@@ -63,4 +63,4 @@ FROM builder AS development
 RUN pip install --no-cache -r requirements/dev.txt
 EXPOSE 2992
 EXPOSE 5000
-CMD [ "npm", "start" ]
+CMD gunicorn --bind 0.0.0.0:$PORT --access-logfile - autoapp:app
