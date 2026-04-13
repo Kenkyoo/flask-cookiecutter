@@ -25,27 +25,29 @@ COPY .env.example .env
 RUN npm run-script build
 
 # ================================= PRODUCTION =================================
-FROM python:${INSTALL_PYTHON_VERSION}-slim-bullseye as production
+FROM python:${INSTALL_PYTHON_VERSION}-slim-bullseye AS builder
+
+# Traemos Node para poder compilar los assets
+COPY --from=node /usr/local/bin/ /usr/local/bin/
+COPY --from=node /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
 
 WORKDIR /app
 
-RUN useradd -m sid
-RUN chown -R sid:sid /app
-USER sid
-ENV PATH="/home/sid/.local/bin:${PATH}"
-
-COPY --from=builder --chown=sid:sid /app/cookiecutter/static /app/cookiecutter/static
+# Instalamos las dependencias de Python necesarias para compilar
 COPY requirements requirements
-RUN pip install --no-cache --user -r requirements/prod.txt
+RUN pip install --no-cache -r requirements/prod.txt
 
-COPY supervisord.conf /etc/supervisor/supervisord.conf
-COPY supervisord_programs /etc/supervisor/conf.d
+# Instalamos las dependencias de Node y compilamos
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build  # <--- Esto generará la carpeta static/build
 
 COPY . .
 
 EXPOSE 5000
 ENTRYPOINT ["/bin/bash", "shell_scripts/supervisord_entrypoint.sh"]
-CMD ["-c", "/etc/supervisor/supervisord.conf"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--access-logfile", "-", "autoapp:app"]
 
 
 # ================================= DEVELOPMENT ================================
