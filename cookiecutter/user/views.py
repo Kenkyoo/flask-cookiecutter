@@ -18,22 +18,18 @@ def members():
 @blueprint.route("/notes", methods=["GET", "POST"])
 @login_required
 def notes():
-    if request.method == "POST":
-        Note.create(
-            content=request.form["content"],
-            user_id=current_user.id
-        )
-
-    notes = Note.query.filter_by(user_id=current_user.id).all()
-    return render_template("users/notes.html", notes=notes)
-    form = NoteForm()
+    form = NoteForm(request.form) # Instanciamos el form
+    
     if form.validate_on_submit():
         Note.create(
             content=form.content.data,
             user_id=current_user.id
         )
-        flash("¡Nota guardada!", "success")
-        return redirect(url_for("user.notes")) # Limpia el form tras enviar
+        # Opcional: puedes añadir un flash message aquí
+        return redirect(url_for("user.notes"))
 
+    # Obtenemos las notas para mostrarlas
     notes = Note.query.filter_by(user_id=current_user.id).all()
+    
+    # Enviamos TANTO las notas COMO el form al template
     return render_template("users/notes.html", notes=notes, form=form)
